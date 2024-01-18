@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.example.com/internetpage"
+           xmlns="http://www.example.com/internetpage"
+           elementFormDefault="qualified">
+
+    <!-- Simple Types -->
+    <xs:simpleType name="PageType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Advertising"/>
+            <xs:enumeration value="NewsPage"/>
+            <xs:enumeration value="Portal"/>
+            <xs:enumeration value="Mirror"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="YesNoType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Yes"/>
+            <xs:enumeration value="No"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="AccessType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Free"/>
+            <xs:enumeration value="Paid"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Complex Types -->
+    <xs:complexType name="CharsType">
+        <xs:sequence>
+            <xs:element name="Email" type="YesNoType" minOccurs="0"/>
+            <xs:element name="News" type="YesNoType" minOccurs="0"/>
+            <xs:element name="Archives" type="YesNoType" minOccurs="0"/>
+            <xs:element name="Voting" type="xs:string" minOccurs="0"/>
+            <xs:element name="Paid" type="AccessType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SiteType">
+        <xs:sequence>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element name="Type" type="PageType"/>
+            <xs:element name="Chars" type="CharsType"/>
+            <xs:element name="Authorize" type="YesNoType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Root Element -->
+    <xs:element name="Site" type="SiteType"/>
+
+</xs:schema>
